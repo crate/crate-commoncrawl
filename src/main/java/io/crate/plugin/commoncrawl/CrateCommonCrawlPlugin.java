@@ -11,25 +11,27 @@ import java.util.List;
 public class CrateCommonCrawlPlugin extends AbstractPlugin {
 
 
+    public static final String PLUGIN_NAME = "crate-commoncrawl";
+    public static final String PLUGIN_DESC = "Plugin to import common crawl data form http endpoints";
+
+
     public CrateCommonCrawlPlugin(Settings settings) {
 
     }
 
     @Override
     public String name() {
-        return "crate-commoncrawl";
+        return PLUGIN_NAME;
     }
 
     @Override
     public String description() {
-
-        return "Plugin to import common crawl data form http endpoints";
+        return PLUGIN_DESC;
     }
 
+
     @Override
-    public Collection<Module> modules(Settings settings) {
-        List<Module> modules = Lists.newArrayList(super.modules(settings));
-        modules.add(new CommonCrawlModule());
-        return modules;
+    public Collection<Module> nodeModules() {
+        return Lists.<Module>newArrayList(new CommonCrawlModule());
     }
 }

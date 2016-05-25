@@ -28,7 +28,6 @@ import org.elasticsearch.common.inject.multibindings.MapBinder;
 
 public class CommonCrawlModule extends AbstractModule {
 
-
     @Override
     protected void configure() {
         MapBinder<String, FileInputFactory> binder = MapBinder.newMapBinder(binder(), String.class, FileInputFactory.class);

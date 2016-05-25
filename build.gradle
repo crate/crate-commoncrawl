@@ -17,7 +17,6 @@ repositories {
 
 
 ext {
-    crate_version = '0.54.6'
     downloadDir = new File(rootDir, 'downloads')
 }
 
@@ -67,7 +66,7 @@ def download (String url, String name){
             src: url,
             verbose: true,
             usetimestamp: true,
-            skipexisting: true,
+            skipexisting: false,
             dest: dest
     )
     return dest;
@@ -98,8 +97,8 @@ def extractTopfolder(File src, String trg){
 
 task downloadCrateRelease << {
     def dest = download(
-            "https://cdn.crate.io/downloads/releases/nightly/crate-0.55.0-201603100301-7130033.tar.gz",
-            "crate-${crate_version}.tar.gz")
+            "https://cdn.crate.io/downloads/releases/nightly/crate-0.55.0-201605240301-43bf934.tar.gz",
+            "crate.tar.gz")
     extractTopfolder(dest, 'parts/crate')
 }
 
@@ -146,7 +145,7 @@ compileJava {
 
 idea {
     project {
-        languageLevel = 'JDK_1_7'
+        languageLevel = 'JDK_1_8'
 
         ipr {
             withXml { provider ->

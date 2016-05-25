@@ -9,26 +9,28 @@ Crate Commoncrawl Importer Plugin
 =================================
 
 This plugin is used to fast import data from `Common Crawl`_ into
-Crate_. The plugin extends a custom schema ``ccrawl`` to the copy 
+Crate_. The plugin extends a custom schema ``ccrawl`` to the copy
 from command which allows to import gzipped common crawl data to
-a table.
+a table. See also our `blog post`_ about what we did here! Also, feel
+free to contribute if you spot any bugs.
 
 The table should have the following schema::
 
-    create table if not exists commoncrawl (
-      ssl boolean primary key, -- http/https
-      authority string primary key, -- xyz.hello.com:123
-      path string primary key, -- /a?d=1#hello
-      date timestamp primary key,
-      week_partition as date_trunc('week', date) primary key,
-      ctype string,
-      clen int,
-      content string INDEX using fulltext with (max_token_length = 40)
+    CREATE TABLE IF NOT EXISTS commoncrawl (
+      ssl BOOLEAN PRIMARY KEY, -- http/https
+      authority STRING PRIMARY KEY, -- xyz.hello.com:123
+      path STRING PRIMARY KEY, -- /a?d=1#hello
+      date TIMESTAMP PRIMARY KEY,
+      week_partition AS date_trunc('week', date),
+      ctype STRING,
+      clen INT,
+      content string INDEX USING FULLTEXT WITH (max_token_length = 40)
     );
 
 Then the data could be imported, for example::
 
-    copy commoncrawl from 'ccrawl://aws-publicdatasets.s3.amazonaws.com/common-crawl/crawl-data/CC-MAIN-2015-35/segments/1440644064538.31/wet/CC-MAIN-20150827025424-00162-ip-10-171-96-226.ec2.internal.warc.wet.gz'
+    COPY commoncrawl FROM 'ccrawl://cr8.is/1WSiodP';
+
 
 
 .. warning::
@@ -98,3 +100,4 @@ visit `https://crate.io/ <https://crate.io/>`_.
 .. _Slack: https://crate.io/docs/support/slackin/
 .. _Common Crawl: http://commoncrawl.org
 .. _Crate: https://crate.io
+.. _blog post: https://crate.io/a/crate-commoncrawl
