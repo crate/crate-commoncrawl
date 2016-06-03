@@ -4,9 +4,9 @@
    :alt: Crate.IO
    :target: https://crate.io
 
-=================================
-Crate Commoncrawl Importer Plugin
-=================================
+==============================================================
+Crate Commoncrawl Importer Plugin (for Crate 0.55.0 or higher)
+==============================================================
 
 This plugin is used to fast import data from `Common Crawl`_ into
 Crate_. The plugin extends a custom schema ``ccrawl`` to the copy
