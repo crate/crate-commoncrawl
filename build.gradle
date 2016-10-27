@@ -15,6 +15,9 @@ repositories {
     jcenter()
 }
 
+ext {
+    crate_version = '0.56.3'
+}
 
 ext {
     downloadDir = new File(rootDir, 'downloads')
@@ -97,7 +100,7 @@ def extractTopfolder(File src, String trg){
 
 task downloadCrateRelease << {
     def dest = download(
-            "https://cdn.crate.io/downloads/releases/nightly/crate-0.55.0-201605240301-43bf934.tar.gz",
+            "https://cdn.crate.io/downloads/releases/crate-${crate_version}.tar.gz",
             "crate.tar.gz")
     extractTopfolder(dest, 'parts/crate')
 }
