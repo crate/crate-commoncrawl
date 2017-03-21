@@ -1,20 +1,44 @@
-.. image:: https://cdn.crate.io/web/2.0/img/crate-avatar_100x100.png
-   :width: 100px
-   :height: 100px
-   :alt: Crate.IO
-   :target: https://crate.io
+=============================
+CrateDB Common Crawl Importer
+=============================
 
-==============================================================
-Crate Commoncrawl Importer Plugin (for Crate 0.55.0 or higher)
-==============================================================
+A plugin for importing `Common Crawl`_ data into CrateDB_.
 
-This plugin is used to fast import data from `Common Crawl`_ into
-Crate_. The plugin extends a custom schema ``ccrawl`` to the copy
-from command which allows to import gzipped common crawl data to
-a table. See also our `blog post`_ about what we did here! Also, feel
-free to contribute if you spot any bugs.
+The plugin adds the ``ccrawl`` URI scheme to the ``COPY FROM`` command, which then allows you to import compressed Common Crawl data to a table.
 
-The table should have the following schema::
+Prerequisites
+=============
+
+You must be using CrateDB 0.55 or newer.
+
+A JDK needs to be installed.
+
+On OS X, we recommend using `Oracle's Java`_. If you're using Linux, we
+recommend OpenJDK_.
+
+We recommend you use a recent Java 8 version.
+
+Setup
+=====
+
+Clone the project::
+
+    $ git clone git@github.com:crate/crate-crate-commoncrawl.git
+
+Build the JAR file like so::
+
+    $ ./gradlew jar
+
+Copy the JAR file to CrateDB's plugins directory::
+
+  cp build/libs/crate-commoncrawl-<version>.jar <CRATEDB_HOME>/plugins
+
+Here, ``<CRATEDB_HOME>`` is the root of your CrateDB installation.
+
+Use
+===
+
+You must create this table::
 
     CREATE TABLE IF NOT EXISTS commoncrawl (
       ssl BOOLEAN PRIMARY KEY, -- http/https
@@ -27,77 +51,38 @@ The table should have the following schema::
       content string INDEX USING FULLTEXT WITH (max_token_length = 40)
     );
 
-Then the data could be imported, for example::
+Then, data can be imported, like so::
 
     COPY commoncrawl FROM 'ccrawl://cr8.is/1WSiodP';
 
+Note here that ``ccrawl://`` must be used instead of ``http://``.
 
+Contributing
+============
 
-.. warning::
+This project is primarily maintained by `Crate.io`_, but we welcome community
+contributions!
 
-    note that the schema ccrawl must be used and not the original schema which is http.
+See the `developer docs`_ and the `contribution docs`_ for more information.
 
+Help
+====
 
-Build & Install
-===============
+Looking for more help?
 
-In order to use it with an existing crate installation, one must build
-a JAR and copy all related JAR's into crate's class path (usually at
-``<CRATE_HOME>/lib``).
+- Read `the project blog post`_
+- Check `StackOverflow`_ for common problems
+- Chat with us on `Slack`_
+- Get `paid support`_
 
-Build JAR
----------
-
-::
-
-   ./gradlew jar
-
-Install JAR
------------
-
-Copy plugin's JAR to crate's plugins directory::
-
-  cp build/libs/crate-commoncrawl-<version>.jar <CRATE_HOME>/plugins/
-
-Run tests
-=========
-
-All test can be run by a single gradle task::
-
-  ./gradlew test
-
-
-Running Crate in your IDE
-=========================
-
-IntelliJ
---------
-
-We recommend IntelliJ to develop crate-commoncrawl. Gradle can be used to generate project
-files that can be opened in IntelliJ::
-
-    ./gradlew compileJava idea
-
-Run/Debug Configurations
-------------------------
-
-``gradlew idea`` will have created a Run/Debug configuration called ``Crate``.
-This configuration can be used to launch and debug Crate from within IntelliJ.
-
-The ``home`` directory will be set to ``<project_root>/sandbox/crate`` and the
-configuration files for it can be found in
-``<project_root>/sandbox/crate/config``.
-
-Help & Contact
-==============
-
-Do you have any questions? Or suggestions? We would be very happy
-to help you. So, feel free to swing by our support channel on Slack_.
-Or for further information and official contact please
-visit `https://crate.io/ <https://crate.io/>`_.
-
-
-.. _Slack: https://crate.io/docs/support/slackin/
 .. _Common Crawl: http://commoncrawl.org
-.. _Crate: https://crate.io
-.. _blog post: https://crate.io/a/crate-commoncrawl
+.. _contribution docs: CONTRIBUTING.rst
+.. _Crate.io: http://crate.io/
+.. _CrateDB: https://github.com/crate/crate
+.. _developer docs: DEVELOP.rst
+.. _OpenJDK: http://openjdk.java.net/projects/jdk8/
+.. _Oracle's Java: http://www.java.com/en/download/help/mac_install.xml
+.. _paid support: https://crate.io/pricing/
+.. _Slack: https://crate.io/docs/support/slackin/
+.. _StackOverflow: https://stackoverflow.com/tags/crate
+.. _the project blog post: https://crate.io/a/crate-commoncrawl
