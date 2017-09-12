@@ -1,14 +1,13 @@
 package io.crate.plugin.commoncrawl;
 
-import com.google.common.collect.Lists;
-import io.crate.plugin.AbstractPlugin;
+import io.crate.Plugin;
 import org.elasticsearch.common.inject.Module;
 import org.elasticsearch.common.settings.Settings;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
 
-public class CrateCommonCrawlPlugin extends AbstractPlugin {
+public class CrateCommonCrawlPlugin implements Plugin {
 
 
     public static final String PLUGIN_NAME = "crate-commoncrawl";
@@ -29,9 +28,8 @@ public class CrateCommonCrawlPlugin extends AbstractPlugin {
         return PLUGIN_DESC;
     }
 
-
     @Override
-    public Collection<Module> nodeModules() {
-        return Lists.<Module>newArrayList(new CommonCrawlModule());
+    public Collection<Module> createGuiceModules() {
+        return Collections.singletonList(new CommonCrawlModule());
     }
 }
