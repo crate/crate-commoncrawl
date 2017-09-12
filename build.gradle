@@ -8,7 +8,7 @@ archivesBaseName = 'crate-commoncrawl'
 group = 'io.crate'
 description = 'Crate.IO CommonCrawl Import Plugin'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -16,7 +16,7 @@ repositories {
 }
 
 ext {
-    crate_version = '0.56.3'
+    crate_version = '2.1.6'
 }
 
 ext {

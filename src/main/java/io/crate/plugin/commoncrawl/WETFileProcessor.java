@@ -1,7 +1,7 @@
 package io.crate.plugin.commoncrawl;
 
 
-import org.elasticsearch.common.logging.ESLogger;
+import org.apache.logging.log4j.Logger;
 import org.elasticsearch.common.logging.Loggers;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
@@ -13,7 +13,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public class WETFileProcessor {
-    private static final ESLogger logger = Loggers.getLogger(WETFileProcessor.class);
+    private static final Logger logger = Loggers.getLogger(WETFileProcessor.class);
 
     private static final String blockDelimiter = "WARC/1.0";
 

@@ -1,9 +1,8 @@
 package io.crate.plugin.commoncrawl;
 
-import com.google.common.base.Predicate;
 import io.crate.operation.collect.files.FileInput;
 import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream;
-import org.elasticsearch.common.logging.ESLogger;
+import org.apache.logging.log4j.Logger;
 import org.elasticsearch.common.logging.Loggers;
 
 import java.io.*;
@@ -12,10 +11,11 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class WETFileInput implements FileInput {
 
-    private static final ESLogger logger = Loggers.getLogger(WETFileInput.class);
+    private static final Logger logger = Loggers.getLogger(WETFileInput.class);
 
     @Override
     public List<URI> listUris(URI fileUri, Predicate<URI> uriPredicate) throws IOException {
