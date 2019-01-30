@@ -70,11 +70,10 @@ Help
 
 Looking for more help?
 
-- Read `the project blog post`_
-- Check `StackOverflow`_ for common problems
-- Chat with us on `Slack`_
-- Get `paid support`_
+- Read the `project blog post`_
+- Check out our `support channels`_
 
+.. _support channels: https://crate.io/support/
 .. _Common Crawl: http://commoncrawl.org
 .. _contribution docs: CONTRIBUTING.rst
 .. _Crate.io: http://crate.io/
@@ -85,4 +84,4 @@ Looking for more help?
 .. _paid support: https://crate.io/pricing/
 .. _Slack: https://crate.io/docs/support/slackin/
 .. _StackOverflow: https://stackoverflow.com/tags/crate
-.. _the project blog post: https://crate.io/a/crate-commoncrawl
+.. _project blog post: https://crate.io/a/crate-commoncrawl
